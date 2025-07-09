@@ -1,6 +1,6 @@
 # RingCentral WebPhone Widget
 
-A WebRTC-based WebPhone widget built with Angular 16 that integrates with RingCentral APIs. This widget can be embedded in Zoho and launched via a URL that includes query parameters for customer information.
+A WebRTC-based WebPhone widget built with Angular 16 that integrates with RingCentral APIs. This widget can be embedded in Zoho and launched via a URL that includes query parameters for customer information and phone number.
 
 ## Features
 
