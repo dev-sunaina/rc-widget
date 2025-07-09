@@ -1,10 +1,10 @@
 export const environment = {
   production: true,
   ringcentral: {
-    clientId: 'YOUR_RINGCENTRAL_CLIENT_ID',
-    clientSecret: 'YOUR_RINGCENTRAL_CLIENT_SECRET',
-    serverUrl: 'https://platform.ringcentral.com',
-    redirectUri: 'https://mydomain.com/webphone/callback'
+    clientId: 'Wy1Qesj3ZQPdUma4dI0gtj',
+    clientSecret: 'ZQw6sdIBr0XfH5KcRwpdyX0M1kSETD2qlbhzlrKDlOix',
+    serverUrl: 'https://ZQw6sdIBr0XfH5KcRwpdyX0M1kSETD2qlbhzlrKDlOix.ringcentral.com',
+    redirectUri: 'https://call.totan.in/webphone/callback'
   },
-  apiEndpoint: 'https://your-backend-api.com/api'
+  apiEndpoint: 'https://call.totan.in/api'
 };
