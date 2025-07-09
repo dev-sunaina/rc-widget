@@ -1,0 +1,77 @@
+<div class="webphone-widget">
+  <div class="webphone-header">
+    <h2>WebPhone</h2>
+    <div class="customer-info" *ngIf="customerName">
+      <span class="customer-name">{{ customerName }}</span>
+    </div>
+  </div>
+
+  <div class="webphone-body">
+    <!-- Call Status Display -->
+    <div class="call-status" *ngIf="currentCall">
+      <div class="status-indicator" [ngClass]="currentCall.status"></div>
+      <div class="status-text">
+        {{ currentCall.status === callStatus.CONNECTING ? 'Connecting...' : 
+           currentCall.status === callStatus.IN_PROGRESS ? 'In Call' : 
+           currentCall.status === callStatus.HOLD ? 'On Hold' : 
+           currentCall.status === callStatus.ENDED ? 'Call Ended' : 
+           currentCall.status === callStatus.FAILED ? 'Call Failed' : 'Idle' }}
+      </div>
+      <div class="call-timer" *ngIf="isCallInProgress() || isCallOnHold()">
+        {{ getCallDuration() }}
+      </div>
+    </div>
+
+    <!-- Phone Number Input -->
+    <div class="phone-input" *ngIf="!isCallActive()">
+      <input 
+        type="tel" 
+        [(ngModel)]="phoneNumber" 
+        placeholder="Enter phone number"
+        class="phone-number-input"
+      />
+    </div>
+
+    <!-- Call Controls -->
+    <div class="call-controls">
+      <!-- Make Call Button (only shown when not in a call) -->
+      <button 
+        class="call-button" 
+        *ngIf="!isCallActive()" 
+        [disabled]="!phoneNumber" 
+        (click)="makeCall()"
+      >
+        <i class="call-icon">📞</i> Call
+      </button>
+
+      <!-- Answer Call Button (only shown for incoming calls) -->
+      <button 
+        class="answer-button" 
+        *ngIf="isCallConnecting() && currentCall?.direction === 'inbound'" 
+        (click)="answerCall()"
+      >
+        <i class="answer-icon">✓</i> Answer
+      </button>
+
+      <!-- In-Call Controls (only shown during active calls) -->
+      <div class="in-call-controls" *ngIf="isCallInProgress() || isCallOnHold()">
+        <button class="mute-button" (click)="toggleMute()">
+          <i class="mute-icon">🔇</i> Mute
+        </button>
+        
+        <button class="hold-button" (click)="toggleHold()">
+          <i class="hold-icon">⏸️</i> 
+          {{ isCallOnHold() ? 'Resume' : 'Hold' }}
+        </button>
+        
+        <button class="hangup-button" (click)="hangupCall()">
+          <i class="hangup-icon">❌</i> End
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Audio elements for WebRTC -->
+  <audio id="remoteAudio" hidden></audio>
+  <audio id="localAudio" hidden muted="muted"></audio>
+</div>
